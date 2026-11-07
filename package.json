@@ -43,9 +43,19 @@
     "video-ads",
     "react-native",
     "web",
+    "nextjs",
+    "video-player",
     "player-agnostic"
   ],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenji-07/react-ad-engine.git"
+  },
+  "homepage": "https://github.com/kenji-07/react-ad-engine#readme",
+  "bugs": {
+    "url": "https://github.com/kenji-07/react-ad-engine/issues"
+  },
+  "author": "Kenji",
   "license": "MIT",
   "dependencies": {
     "fast-xml-parser": "^5.12.0"
