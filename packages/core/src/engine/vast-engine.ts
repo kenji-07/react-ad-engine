@@ -13,6 +13,7 @@ import type {
   VastCompanion,
   VastNonLinear,
 } from '../types/vast';
+import type { VmapDocument } from '../types/vmap';
 import type {
   AdStateSnapshot,
   AdLifecycleCallbacks,
@@ -125,6 +126,37 @@ export class VastEngine {
   }
 
   /**
+   * Universal ad tag loader:
+   * Accepts a single URL (adTagUrl) or raw XML, automatically detects whether
+   * it is VMAP or VAST, and starts the appropriate scheduling and lifecycle.
+   */
+  public async loadAdTag(urlOrXml: string): Promise<VastDocument | VmapDocument> {
+    this.stateMachine.transitionTo('loading');
+    let xml = urlOrXml.trim();
+
+    if (xml.startsWith('http://') || xml.startsWith('https://')) {
+      const res = await fetch(xml);
+      if (!res.ok) {
+        const err = new VastError(`Failed to fetch ad tag from ${xml}: HTTP ${res.status}`, VastErrorCode.MEDIA_FILE_NOT_FOUND);
+        this.stateMachine.setError(err);
+        throw err;
+      }
+      xml = await res.text();
+    }
+
+    if (this.isVmapXml(xml)) {
+      return this.loadVmapXml(xml);
+    } else {
+      return this.loadVastXml(xml);
+    }
+  }
+
+  public isVmapXml(xml: string): boolean {
+    const trimmed = xml.trim();
+    return /<([a-zA-Z0-9_-]+:)?VMAP[\s>]/i.test(trimmed);
+  }
+
+  /**
    * Loads a VAST URL or raw XML string
    */
   public async loadVast(urlOrXml: string): Promise<VastDocument> {
@@ -141,6 +173,10 @@ export class VastEngine {
       xml = await res.text();
     }
 
+    return this.loadVastXml(xml);
+  }
+
+  private async loadVastXml(xml: string): Promise<VastDocument> {
     try {
       const rawDoc = this.vastParser.parse(xml);
       const resolvedDoc = await this.wrapperResolver.resolve(rawDoc);
@@ -180,7 +216,7 @@ export class VastEngine {
   /**
    * Loads a VMAP URL or raw XML string
    */
-  public async loadVmap(urlOrXml: string): Promise<void> {
+  public async loadVmap(urlOrXml: string): Promise<VmapDocument> {
     this.stateMachine.transitionTo('loading');
     let xml = urlOrXml.trim();
 
@@ -194,6 +230,10 @@ export class VastEngine {
       xml = await res.text();
     }
 
+    return this.loadVmapXml(xml);
+  }
+
+  private async loadVmapXml(xml: string): Promise<VmapDocument> {
     try {
       const vmapDoc = this.vmapParser.parse(xml);
       this.scheduler.scheduleVmap(vmapDoc);
@@ -201,6 +241,7 @@ export class VastEngine {
 
       // Check if preroll is present
       this.scheduler.checkPreroll();
+      return vmapDoc;
     } catch (err: any) {
       const vastError = err instanceof VastError ? err : new VastError(err.message, VastErrorCode.UNDEFINED_ERROR);
       this.stateMachine.setError(vastError);

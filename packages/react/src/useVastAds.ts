@@ -12,10 +12,29 @@ import {
 import { mergeUIConfig } from './default-ui-config';
 
 export interface UseVastAdsOptions {
+  /**
+   * Primary single Ad Tag URL.
+   * Can point to either a VAST or VMAP XML endpoint;
+   * the SDK automatically detects the format and handles scheduling/playback.
+   */
+  adTagUrl?: string;
+
+  /**
+   * Raw Ad Tag XML string (either VAST or VMAP)
+   */
+  adTagXml?: string;
+
+  /**
+   * Convenient alias for adTagUrl or raw XML
+   */
+  adTag?: string;
+
+  // Optional aliases for explicit specification if desired
   vastUrl?: string;
   vastXml?: string;
   vmapUrl?: string;
   vmapXml?: string;
+
   playerAdapter?: PlayerAdapter;
   ui?: Partial<VastUIConfig>;
   tracking?: Partial<TrackingConfig>;
@@ -55,6 +74,7 @@ export interface UseVastAdsReturn {
   unmuteAd: () => void;
 
   // Engine actions
+  loadAdTag: (urlOrXml: string) => Promise<any>;
   loadVast: (urlOrXml: string) => Promise<any>;
   loadVmap: (urlOrXml: string) => Promise<any>;
   destroy: () => void;
@@ -125,18 +145,30 @@ export function useVastAds(config: UseVastAdsOptions = {}): UseVastAdsReturn {
     return undefined;
   }, [config.playerAdapter, engine]);
 
-  // Load initial VAST or VMAP if provided
+  // Load initial Ad Tag if provided
   useEffect(() => {
-    if (config.vastUrl) {
-      engine.loadVast(config.vastUrl).catch(() => {});
-    } else if (config.vastXml) {
-      engine.loadVast(config.vastXml).catch(() => {});
-    } else if (config.vmapUrl) {
-      engine.loadVmap(config.vmapUrl).catch(() => {});
-    } else if (config.vmapXml) {
-      engine.loadVmap(config.vmapXml).catch(() => {});
+    const target =
+      config.adTagUrl ||
+      config.adTag ||
+      config.adTagXml ||
+      config.vastUrl ||
+      config.vastXml ||
+      config.vmapUrl ||
+      config.vmapXml;
+
+    if (target) {
+      engine.loadAdTag(target).catch(() => {});
     }
-  }, [config.vastUrl, config.vastXml, config.vmapUrl, config.vmapXml, engine]);
+  }, [
+    config.adTagUrl,
+    config.adTag,
+    config.adTagXml,
+    config.vastUrl,
+    config.vastXml,
+    config.vmapUrl,
+    config.vmapXml,
+    engine,
+  ]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -161,6 +193,7 @@ export function useVastAds(config: UseVastAdsOptions = {}): UseVastAdsReturn {
   const muteAd = useCallback(() => engine.muteAd(), [engine]);
   const unmuteAd = useCallback(() => engine.unmuteAd(), [engine]);
 
+  const loadAdTag = useCallback((uOrX: string) => engine.loadAdTag(uOrX), [engine]);
   const loadVast = useCallback((uOrX: string) => engine.loadVast(uOrX), [engine]);
   const loadVmap = useCallback((uOrX: string) => engine.loadVmap(uOrX), [engine]);
   const destroy = useCallback(() => engine.destroy(), [engine]);
@@ -183,6 +216,7 @@ export function useVastAds(config: UseVastAdsOptions = {}): UseVastAdsReturn {
     resumeAd,
     muteAd,
     unmuteAd,
+    loadAdTag,
     loadVast,
     loadVmap,
     destroy,

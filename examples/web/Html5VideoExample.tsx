@@ -14,7 +14,7 @@ export function WebVideoPlayerWithAds() {
   }
 
   const ads = useVastAds({
-    vastUrl: 'https://example.com/linear-ad.vast.xml',
+    adTagUrl: 'https://example.com/linear-ad.vast.xml',
     playerAdapter: adapterRef.current,
     ui: {
       theme: 'dark',

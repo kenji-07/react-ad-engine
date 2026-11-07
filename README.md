@@ -79,7 +79,7 @@ export function MyVideoScreen() {
   const adapterRef = useRef(new ReactNativeVideoV7Adapter());
 
   const ads = useVastAds({
-    vastUrl: 'https://example.com/preroll.vast.xml',
+    adTagUrl: 'https://example.com/preroll.vast.xml',
     playerAdapter: adapterRef.current,
     ui: {
       theme: 'dark',
@@ -138,7 +138,7 @@ export function ExpoPlayerScreen() {
   const adapter = useMemo(() => new ExpoVideoAdapter(player), [player]);
 
   const ads = useVastAds({
-    vmapUrl: 'https://example.com/vmap-breaks.xml',
+    adTagUrl: 'https://example.com/vmap-breaks.xml',
     playerAdapter: adapter,
   });
 
@@ -176,7 +176,7 @@ export function WebPlayer() {
   const adapterRef = useRef(new Html5VideoAdapter());
 
   const ads = useVastAds({
-    vastUrl: 'https://example.com/linear-ad.vast.xml',
+    adTagUrl: 'https://example.com/linear-ad.vast.xml',
     playerAdapter: adapterRef.current,
   });
 
@@ -294,7 +294,7 @@ export function WebPlayer() {
 
 ```tsx
 const ads = useVastAds({
-  vastUrl: 'https://example.com/vast.xml',
+  adTagUrl: 'https://example.com/ad-response.xml',
   ui: { enabled: false }, // Headless mode
 });
 

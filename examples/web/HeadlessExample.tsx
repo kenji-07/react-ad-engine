@@ -8,7 +8,7 @@ import { useVastAds } from '@react-ad-engine/react';
  */
 export function HeadlessAdvertisingPlayer() {
   const ads = useVastAds({
-    vastUrl: 'https://example.com/vast.xml',
+    adTagUrl: 'https://example.com/ad-response.xml',
     ui: {
       enabled: false, // Disables all built-in UI
     },

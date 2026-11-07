@@ -12,7 +12,7 @@ export function ExpoPlayerWithAds({ expoPlayerInstance }: { expoPlayerInstance?:
   const adapter = useMemo(() => new ExpoVideoAdapter(expoPlayerInstance), [expoPlayerInstance]);
 
   const ads = useVastAds({
-    vmapUrl: 'https://example.com/vmap-schedule.xml',
+    adTagUrl: 'https://example.com/vmap-schedule.xml',
     playerAdapter: adapter,
     options: {
       autoResumeContent: true,

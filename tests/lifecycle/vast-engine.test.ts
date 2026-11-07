@@ -104,4 +104,27 @@ describe('VastEngine & PlayerAdapter Integration', () => {
     expect(cleanHtml).not.toContain('onclick');
     expect(cleanHtml).not.toContain('javascript:void(0)');
   });
+
+  it('loadAdTag automatically detects VAST and VMAP from a single adTagUrl parameter', async () => {
+    const engine = new VastEngine();
+    const linearXml = fs.readFileSync(path.join(fixturesDir, 'linear-video.vast.xml'), 'utf-8');
+    const vmapXml = fs.readFileSync(path.join(fixturesDir, 'vmap-standard.xml'), 'utf-8');
+
+    // 1. Pass VAST XML into loadAdTag
+    const vastDoc = await engine.loadAdTag(linearXml);
+    expect(vastDoc).toBeDefined();
+    expect(engine.getState().state).toBe('adPlaying');
+    expect(engine.getState().currentCreative?.linear?.duration).toBe(30);
+
+    // 2. Pass VMAP XML into loadAdTag
+    const engineVmap = new VastEngine();
+    const vmapDoc = await engineVmap.loadAdTag(vmapXml);
+    expect(vmapDoc).toBeDefined();
+    // VMAP has a preroll, so it transitions to adLoading immediately
+    expect(engineVmap.getState().isAdActive).toBe(true);
+    expect(engineVmap.getState().state).toBe('adLoading');
+
+    engine.destroy();
+    engineVmap.destroy();
+  });
 });
