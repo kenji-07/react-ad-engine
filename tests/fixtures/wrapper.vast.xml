@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="3.0">
+  <Ad id="ad-wrapper-001">
+    <Wrapper>
+      <AdSystem>ReactAdEngine Wrapper</AdSystem>
+      <VASTAdTagURI><![CDATA[https://ads.example.com/target-inline.vast.xml]]></VASTAdTagURI>
+      <Error><![CDATA[https://tracking.example.com/wrapper/error?code=[ERRORCODE]]]></Error>
+      <Impression id="imp-wrapper-1"><![CDATA[https://tracking.example.com/wrapper/impression]]></Impression>
+      <Creatives>
+        <Creative id="cr-wrapper-1">
+          <Linear>
+            <TrackingEvents>
+              <Tracking event="start"><![CDATA[https://tracking.example.com/wrapper/start]]></Tracking>
+              <Tracking event="complete"><![CDATA[https://tracking.example.com/wrapper/complete]]></Tracking>
+            </TrackingEvents>
+            <VideoClicks>
+              <ClickTracking id="ctr-wrapper"><![CDATA[https://tracking.example.com/wrapper/click]]></ClickTracking>
+            </VideoClicks>
+          </Linear>
+        </Creative>
+      </Creatives>
+    </Wrapper>
+  </Ad>
+</VAST>

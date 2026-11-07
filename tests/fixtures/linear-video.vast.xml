@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Ad id="ad-linear-001" sequence="1">
+    <InLine>
+      <AdSystem version="1.0">ReactAdEngine</AdSystem>
+      <AdTitle>Linear Video Ad Sample</AdTitle>
+      <Description>Production-ready linear video advertisement with skip offset and tracking</Description>
+      <Error><![CDATA[https://tracking.example.com/error?code=[ERRORCODE]&cb=[CACHEBUSTING]]]></Error>
+      <Impression id="imp-1"><![CDATA[https://tracking.example.com/impression?adId=ad-linear-001&ts=[TIMESTAMP]]]></Impression>
+      <Impression id="imp-2"><![CDATA[https://tracking.example.com/impression2?adId=ad-linear-001]]></Impression>
+      <Creatives>
+        <Creative id="creative-linear-1" sequence="1">
+          <Linear skipoffset="00:00:05">
+            <Duration>00:00:30</Duration>
+            <TrackingEvents>
+              <Tracking event="creativeView"><![CDATA[https://tracking.example.com/creativeView]]></Tracking>
+              <Tracking event="start"><![CDATA[https://tracking.example.com/start]]></Tracking>
+              <Tracking event="firstQuartile"><![CDATA[https://tracking.example.com/firstQuartile]]></Tracking>
+              <Tracking event="midpoint"><![CDATA[https://tracking.example.com/midpoint]]></Tracking>
+              <Tracking event="thirdQuartile"><![CDATA[https://tracking.example.com/thirdQuartile]]></Tracking>
+              <Tracking event="complete"><![CDATA[https://tracking.example.com/complete]]></Tracking>
+              <Tracking event="skip"><![CDATA[https://tracking.example.com/skip]]></Tracking>
+              <Tracking event="pause"><![CDATA[https://tracking.example.com/pause]]></Tracking>
+              <Tracking event="resume"><![CDATA[https://tracking.example.com/resume]]></Tracking>
+              <Tracking event="mute"><![CDATA[https://tracking.example.com/mute]]></Tracking>
+              <Tracking event="unmute"><![CDATA[https://tracking.example.com/unmute]]></Tracking>
+              <Tracking event="fullscreen"><![CDATA[https://tracking.example.com/fullscreen]]></Tracking>
+              <Tracking event="exitFullscreen"><![CDATA[https://tracking.example.com/exitFullscreen]]></Tracking>
+              <Tracking event="progress" offset="00:00:10"><![CDATA[https://tracking.example.com/progress?offset=10]]></Tracking>
+            </TrackingEvents>
+            <VideoClicks>
+              <ClickThrough id="ct-linear-1"><![CDATA[https://advertiser.example.com/landing-page]]></ClickThrough>
+              <ClickTracking id="ctr-1"><![CDATA[https://tracking.example.com/click?type=primary]]></ClickTracking>
+              <ClickTracking id="ctr-2"><![CDATA[https://tracking.example.com/click?type=secondary]]></ClickTracking>
+            </VideoClicks>
+            <MediaFiles>
+              <MediaFile id="media-1" delivery="progressive" type="video/mp4" width="1920" height="1080" bitrate="2500" scalable="true" maintainAspectRatio="true">
+                <![CDATA[https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4]]>
+              </MediaFile>
+              <MediaFile id="media-2" delivery="progressive" type="video/webm" width="1280" height="720" bitrate="1200" scalable="true" maintainAspectRatio="true">
+                <![CDATA[https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.webm]]>
+              </MediaFile>
+            </MediaFiles>
+          </Linear>
+        </Creative>
+      </Creatives>
+      <Extensions>
+        <Extension type="RollPlacement">
+          <Placement>preroll</Placement>
+        </Extension>
+      </Extensions>
+    </InLine>
+  </Ad>
+</VAST>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="3.0">
+  <Ad id="ad-companion-004">
+    <InLine>
+      <AdSystem>ReactAdEngine</AdSystem>
+      <AdTitle>Companion Ad Unit</AdTitle>
+      <Impression id="imp-comp-1"><![CDATA[https://tracking.example.com/main-impression]]></Impression>
+      <Creatives>
+        <Creative id="creative-companion-1">
+          <CompanionAds>
+            <Companion id="comp-img-1" width="300" height="250">
+              <StaticResource creativeType="image/jpeg">
+                <![CDATA[https://via.placeholder.com/300x250.jpg?text=Side+Banner+300x250]]>
+              </StaticResource>
+              <AltText>Visit our official store</AltText>
+              <CompanionClickThrough>
+                <![CDATA[https://advertiser.example.com/store]]>
+              </CompanionClickThrough>
+              <CompanionClickTracking id="c-track-1">
+                <![CDATA[https://tracking.example.com/companion-click]]>
+              </CompanionClickTracking>
+              <TrackingEvents>
+                <Tracking event="creativeView"><![CDATA[https://tracking.example.com/companion-creativeView]]></Tracking>
+              </TrackingEvents>
+            </Companion>
+            <Companion id="comp-html-2" width="728" height="90">
+              <HTMLResource>
+                <![CDATA[<div style="background:#222;color:#fff;padding:10px;"><h4>Leaderboard Banner</h4></div>]]>
+              </HTMLResource>
+              <CompanionClickThrough>
+                <![CDATA[https://advertiser.example.com/leaderboard]]>
+              </CompanionClickThrough>
+            </Companion>
+          </CompanionAds>
+        </Creative>
+      </Creatives>
+      <Extensions>
+        <Extension type="CompanionDisplay">
+          <Position>outside_player</Position>
+          <Width>300</Width>
+          <Height>250</Height>
+        </Extension>
+      </Extensions>
+    </InLine>
+  </Ad>
+</VAST>

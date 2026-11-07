@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="3.0">
+  <Ad id="ad-nonlinear-002">
+    <InLine>
+      <AdSystem>ReactAdEngine</AdSystem>
+      <AdTitle>NonLinear Image Ad Banner</AdTitle>
+      <Impression id="imp-nl-1"><![CDATA[https://tracking.example.com/nonlinear-impression]]></Impression>
+      <Creatives>
+        <Creative id="creative-nl-1">
+          <NonLinearAds>
+            <NonLinear id="nl-1" width="480" height="70" minSuggestedDuration="00:00:15" scalable="true" maintainAspectRatio="true">
+              <StaticResource creativeType="image/png">
+                <![CDATA[https://via.placeholder.com/480x70.png?text=Special+Promotion+Banner]]>
+              </StaticResource>
+              <NonLinearClickThrough>
+                <![CDATA[https://advertiser.example.com/nonlinear-promo]]>
+              </NonLinearClickThrough>
+              <NonLinearClickTracking id="nl-ctr-1">
+                <![CDATA[https://tracking.example.com/nonlinear-click]]>
+              </NonLinearClickTracking>
+            </NonLinear>
+            <TrackingEvents>
+              <Tracking event="creativeView"><![CDATA[https://tracking.example.com/nl-creativeView]]></Tracking>
+              <Tracking event="acceptInvitation"><![CDATA[https://tracking.example.com/nl-accept]]></Tracking>
+              <Tracking event="close"><![CDATA[https://tracking.example.com/nl-close]]></Tracking>
+            </TrackingEvents>
+          </NonLinearAds>
+        </Creative>
+      </Creatives>
+      <Extensions>
+        <Extension type="BannerPlacement">
+          <Placement>overlay_banner</Placement>
+        </Extension>
+      </Extensions>
+    </InLine>
+  </Ad>
+</VAST>

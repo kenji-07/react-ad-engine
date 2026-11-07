@@ -1,0 +1,78 @@
+{
+  "name": "react-ad-engine",
+  "version": "1.0.0",
+  "description": "Production-ready, player-agnostic Custom VAST / VMAP Advertising SDK for React Native, Expo, and Web",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./core": {
+      "types": "./packages/core/src/index.ts",
+      "import": "./packages/core/src/index.ts"
+    },
+    "./react": {
+      "types": "./packages/react/src/index.ts",
+      "import": "./packages/react/src/index.ts"
+    },
+    "./web": {
+      "types": "./packages/web/src/index.ts",
+      "import": "./packages/web/src/index.ts"
+    },
+    "./react-native": {
+      "types": "./packages/react-native/src/index.ts",
+      "import": "./packages/react-native/src/index.ts"
+    },
+    "./expo": {
+      "types": "./packages/expo/src/index.ts",
+      "import": "./packages/expo/src/index.ts"
+    },
+    "./integrations": {
+      "types": "./packages/integrations/src/index.ts",
+      "import": "./packages/integrations/src/index.ts"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "vast",
+    "vmap",
+    "advertising",
+    "video-ads",
+    "react-native",
+    "expo",
+    "web",
+    "player-agnostic"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "fast-xml-parser": "^5.12.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-native": "0.73.0",
+    "react": "^19.3.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
+    "types": ["node"],
+    "paths": {
+      "@react-ad-engine/core": ["./packages/core/src/index.ts"],
+      "@react-ad-engine/core/*": ["./packages/core/src/*"],
+      "@react-ad-engine/react": ["./packages/react/src/index.ts"],
+      "@react-ad-engine/react/*": ["./packages/react/src/*"],
+      "@react-ad-engine/web": ["./packages/web/src/index.ts"],
+      "@react-ad-engine/web/*": ["./packages/web/src/*"],
+      "@react-ad-engine/react-native": ["./packages/react-native/src/index.ts"],
+      "@react-ad-engine/react-native/*": ["./packages/react-native/src/*"],
+      "@react-ad-engine/expo": ["./packages/expo/src/index.ts"],
+      "@react-ad-engine/expo/*": ["./packages/expo/src/*"],
+      "@react-ad-engine/integrations": ["./packages/integrations/src/index.ts"],
+      "@react-ad-engine/integrations/*": ["./packages/integrations/src/*"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "packages/*/src/**/*",
+    "tests/**/*",
+    "examples/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

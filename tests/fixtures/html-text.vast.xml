@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="3.0">
+  <Ad id="ad-text-html-003">
+    <InLine>
+      <AdSystem>ReactAdEngine</AdSystem>
+      <AdTitle>HTML and Text Ad Creative</AdTitle>
+      <Impression id="imp-txt-1"><![CDATA[https://tracking.example.com/text-ad-impression]]></Impression>
+      <Creatives>
+        <Creative id="creative-text-1">
+          <NonLinearAds>
+            <NonLinear id="nl-html-1" width="320" height="100">
+              <HTMLResource>
+                <![CDATA[<div class="custom-ad"><h3>Exclusive Offer</h3><p>Subscribe today and get 50% discount!</p></div>]]>
+              </HTMLResource>
+              <NonLinearClickThrough>
+                <![CDATA[https://advertiser.example.com/text-offer]]>
+              </NonLinearClickThrough>
+            </NonLinear>
+          </NonLinearAds>
+        </Creative>
+      </Creatives>
+      <Extensions>
+        <Extension type="TextAd">
+          <TextOverlay enabled="true">
+            <Title>Text AD</Title>
+            <Description>Hello</Description>
+            <CtaButton>Learn More</CtaButton>
+            <ClickUrl>https://example.com</ClickUrl>
+          </TextOverlay>
+        </Extension>
+      </Extensions>
+    </InLine>
+  </Ad>
+</VAST>
