@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
 import { ReactNativeVideoV7Adapter } from '../../packages/integrations/src/rn-video-v7/rn-video-adapter';
-import { ExpoVideoAdapter } from '../../packages/integrations/src/expo-video/expo-video-adapter';
 import { Html5VideoAdapter } from '../../packages/web/src/adapters/html5-video-adapter';
 import { VastEngine } from '../../packages/core/src/engine/vast-engine';
 
@@ -45,49 +44,6 @@ describe('Player Adapters Integration', () => {
 
     unsub();
     engine.destroy();
-  });
-
-  it('ExpoVideoAdapter bridges Expo player interface and listeners', () => {
-    const listeners: Record<string, Function> = {};
-    const mockExpoPlayer = {
-      play: vi.fn(),
-      pause: vi.fn(),
-      currentTime: 10,
-      duration: 300,
-      playing: true,
-      addListener: vi.fn((event: string, cb: Function) => {
-        listeners[event] = cb;
-        return { remove: () => delete listeners[event] };
-      }),
-    };
-
-    const adapter = new ExpoVideoAdapter(mockExpoPlayer);
-    expect(mockExpoPlayer.addListener).toHaveBeenCalledWith('timeUpdate', expect.any(Function));
-    expect(mockExpoPlayer.addListener).toHaveBeenCalledWith('playingChange', expect.any(Function));
-    expect(mockExpoPlayer.addListener).toHaveBeenCalledWith('playToEnd', expect.any(Function));
-
-    const eventSpy = vi.fn();
-    adapter.subscribe(eventSpy);
-
-    // Trigger timeUpdate
-    listeners['timeUpdate']({ currentTime: 25 });
-    expect(eventSpy).toHaveBeenCalledWith(
-      expect.objectContaining({ type: 'progress', currentTime: 25, duration: 300 })
-    );
-
-    // Trigger playingChange
-    listeners['playingChange']({ isPlaying: false });
-    expect(eventSpy).toHaveBeenCalledWith(expect.objectContaining({ type: 'pause' }));
-
-    // Commands
-    adapter.pauseContent();
-    expect(mockExpoPlayer.pause).toHaveBeenCalled();
-
-    adapter.resumeContent();
-    expect(mockExpoPlayer.play).toHaveBeenCalled();
-
-    adapter.destroy();
-    expect(Object.keys(listeners)).toHaveLength(0);
   });
 
   it('Html5VideoAdapter attaches to HTMLVideoElement mock', () => {

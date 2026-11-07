@@ -1,7 +1,7 @@
 {
   "name": "react-ad-engine",
   "version": "1.0.0",
-  "description": "Production-ready, player-agnostic Custom VAST / VMAP Advertising SDK for React Native, Expo, and Web",
+  "description": "Production-ready, player-agnostic Custom VAST / VMAP Advertising SDK for React Native and Web",
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -26,10 +26,6 @@
       "types": "./packages/react-native/src/index.ts",
       "import": "./packages/react-native/src/index.ts"
     },
-    "./expo": {
-      "types": "./packages/expo/src/index.ts",
-      "import": "./packages/expo/src/index.ts"
-    },
     "./integrations": {
       "types": "./packages/integrations/src/index.ts",
       "import": "./packages/integrations/src/index.ts"
@@ -46,7 +42,6 @@
     "advertising",
     "video-ads",
     "react-native",
-    "expo",
     "web",
     "player-agnostic"
   ],

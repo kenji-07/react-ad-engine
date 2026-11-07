@@ -1,6 +1,6 @@
 # React Ad Engine (Custom Cross-Platform VAST / VMAP Advertising SDK)
 
-React Native, Expo болон Web (HTML5) орчинд ажиллах зориулалттай, тоглуулагчаас бүрэн хамааралгүй (player-agnostic), үйлдвэрлэлийн түвшний (production-ready) VAST / VMAP зар сурталчилгааны SDK.
+React Native болон Web (HTML5) орчинд ажиллах зориулалттай, тоглуулагчаас бүрэн хамааралгүй (player-agnostic), үйлдвэрлэлийн түвшний (production-ready) VAST / VMAP зар сурталчилгааны SDK.
 
 ---
 
@@ -10,7 +10,7 @@ React Native, Expo болон Web (HTML5) орчинд ажиллах зориу
 > 
 > *(The developer owns the video player. Our SDK owns the advertising experience.)*
 
-Манай SDK нь өөрөө видео тоглуулагч үүсгэхгүй, өмчлөхгүй. Хөгжүүлэгч өөрийн ашиглаж буй ямар ч видео тоглуулагчийг (Жишээ нь: `react-native-video` v7, Expo Video, HTML5 Video гэх мэт) энэхүү SDK-тэй ерөнхий `PlayerAdapter` интерфейсээр холбож ашиглана.
+Манай SDK нь өөрөө видео тоглуулагч үүсгэхгүй, өмчлөхгүй. Хөгжүүлэгч өөрийн ашиглаж буй ямар ч видео тоглуулагчийг (Жишээ нь: `react-native-video` v7, HTML5 Video гэх мэт) энэхүү SDK-тэй ерөнхий `PlayerAdapter` интерфейсээр холбож ашиглана.
 
 ---
 
@@ -18,7 +18,6 @@ React Native, Expo болон Web (HTML5) орчинд ажиллах зориу
 
 - **React:** `>=18.0.0` (React 18.x, **React 19.3.0, 19.3.1** болон түүнээс дээш бүх хувилбартай 100% нийцтэй).
 - **React Native:** `>=0.70.0` (**0.73.x, 0.74.x, 0.75.x, 0.76.x, 0.80+** болон шинэ New Architecture-тай бүрэн нийцтэй).
-- **Expo:** SDK 50, 51, 52 болон түүнээс дээш (`expo-video`, `expo-av`).
 - **Web:** Орчин үеийн бүх веб хөтөч (Chrome, Safari, Firefox, Edge, Mobile Web).
 - **Zero Video Dependency:** SDK-ийн үндсэн цөм нь `react-native-video`, Google IMA, эсвэл гуравдагч тоглуулагчаас ямар ч хамааралгүй (0 runtime dependency).
 
@@ -55,8 +54,7 @@ packages/
   ├── react/           # React Hooks (useVastAds, useVmapAds, UI Theme тохиргоо)
   ├── web/             # Вебэд зориулсан Built-in UI, HTML5 Video Adapter
   ├── react-native/    # React Native Built-in UI, Native TextAd & ImageAd
-  ├── expo/            # Expo зориулалтын тохиргоо болон ExpoVideoAdapter
-  └── integrations/    # react-native-video v7, Expo Video, HTML5 тоглуулагчийн адаптерууд
+  └── integrations/    # react-native-video v7, HTML5 тоглуулагчийн адаптерууд
 ```
 
 ---
@@ -123,48 +121,7 @@ const styles = StyleSheet.create({
 
 ---
 
-### 2. Expo видео тоглуулагчтай холбох
-
-```tsx
-import React, { useMemo } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useVideoPlayer, VideoView } from 'expo-video';
-import { useVastAds } from 'react-ad-engine/react';
-import { VastAdOverlay } from 'react-ad-engine/react-native';
-import { ExpoVideoAdapter } from 'react-ad-engine/integrations';
-
-export function ExpoPlayerScreen() {
-  const player = useVideoPlayer('https://example.com/movie.mp4');
-  const adapter = useMemo(() => new ExpoVideoAdapter(player), [player]);
-
-  const ads = useVastAds({
-    adTagUrl: 'https://example.com/vmap-breaks.xml',
-    playerAdapter: adapter,
-  });
-
-  return (
-    <View style={styles.container}>
-      <VideoView player={player} style={styles.video} />
-
-      <VastAdOverlay
-        state={ads.state}
-        ui={ads.ui}
-        onSkip={ads.skipAd}
-        onClick={ads.clickAd}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: { width: '100%', aspectRatio: 16 / 9 },
-  video: { width: '100%', height: '100%' },
-});
-```
-
----
-
-### 3. Web (HTML5) видео тоглуулагчтай холбох
+### 2. Web (HTML5) видео тоглуулагчтай холбох
 
 ```tsx
 import React, { useRef, useEffect } from 'react';
@@ -472,7 +429,7 @@ idle -> loading -> ready -> contentPlaying
 7. **VMAP 1.0.1:** Preroll, Midroll, Postroll зарын дараалал.
 8. **Seek Detection:** Midroll алгасаж гүйлгэх үеийн `play-last` болон `ignore` бодлого.
 9. **Tracking Deduplication:** 25%, 50%, 75%, 100% quartiles давхардахгүй байх баталгаа.
-10. **Player Adapters:** `react-native-video` v7, Expo Video, HTML5 Video адаптеруудын холболт.
+10. **Player Adapters:** `react-native-video` v7 болон HTML5 Video адаптеруудын холболт.
 11. **UI Customization:** Theme солих, custom render props, Headless горим.
 
 ```bash

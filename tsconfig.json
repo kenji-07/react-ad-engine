@@ -30,8 +30,6 @@
       "@react-ad-engine/web/*": ["./packages/web/src/*"],
       "@react-ad-engine/react-native": ["./packages/react-native/src/index.ts"],
       "@react-ad-engine/react-native/*": ["./packages/react-native/src/*"],
-      "@react-ad-engine/expo": ["./packages/expo/src/index.ts"],
-      "@react-ad-engine/expo/*": ["./packages/expo/src/*"],
       "@react-ad-engine/integrations": ["./packages/integrations/src/index.ts"],
       "@react-ad-engine/integrations/*": ["./packages/integrations/src/*"]
     }
